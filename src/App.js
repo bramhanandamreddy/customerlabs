@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+// import "./App.scss";
+import PageHeader from "./components/PageHeader/PageHeader";
+import SegmentCreation from "./components/SegmentCreation/SegmentCreation";
+import SegmentPopup from "./components/SegmentPopup/SegmentPopup";
 function App() {
+  const [openPopup, setOpenPopup] = useState(false);
+  function handleCloseModal() {
+    setOpenPopup(false);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {openPopup && (
+        <SegmentPopup
+          onClose={handleCloseModal}
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+        />
+      )}
+      <PageHeader text="View Audience" />
+      <SegmentCreation setOpenPopup={setOpenPopup} />
     </div>
   );
 }
